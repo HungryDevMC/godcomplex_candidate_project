@@ -51,7 +51,7 @@ public class PlayerClickListener implements Listener {
         }
 
         if (VERTICES_LIST.size() == 3) {
-            DrawParticleShapeRunnable drawParticleShapeRunnable = new DrawParticleShapeRunnable(ParticleShapeType.TRIANGLE, e.getPlayer(), VERTICES_LIST, 3);
+            DrawParticleShapeRunnable drawParticleShapeRunnable = new DrawParticleShapeRunnable(e.getPlayer().isSneaking() ? ParticleShapeType.TRIANGLE_FILLED : ParticleShapeType.TRIANGLE, e.getPlayer(), VERTICES_LIST, 3);
             drawParticleShapeRunnable.runTaskTimer(ParticleEffectsPlugin.getInstance(), 0, 10);
             PLAYER_VERTICES_SELECTION_MAP.remove(playerUuid);
         }

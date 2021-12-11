@@ -1,24 +1,23 @@
 package com.godcomplex.domain;
 
+import com.godcomplex.domain.drawable_impl.DrawableOutlinedTriangle;
 import com.godcomplex.domain.drawable_impl.DrawableParticleLine;
-import com.godcomplex.utils.ArgumentParser;
-import org.bukkit.Color;
+import com.godcomplex.utils.LocationUtil;
 import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.util.Vector;
 
-import java.util.Date;
 import java.util.List;
 
 public enum ParticleShapeType {
-    TRIANGLE((player, locations, arguments) -> {
-        DrawableParticleLine drawableParticleLine = new DrawableParticleLine();
-        drawableParticleLine.drawShape(player, List.of(locations.get(0), locations.get(1)));
-        drawableParticleLine.drawShape(player, List.of(locations.get(0), locations.get(2)));
-        drawableParticleLine.drawShape(player, List.of(locations.get(1), locations.get(2)));
-    }),
-    TRIANGLE_FILLED((player, location, argumentLocations) -> {
+    TRIANGLE(new DrawableOutlinedTriangle()),
+    TRIANGLE_FILLED((player, locations, arguments) -> {
+        DrawableOutlinedTriangle drawableOutlinedTriangle = new DrawableOutlinedTriangle();
+        drawableOutlinedTriangle.drawShape(player, locations, arguments);
 
+        DrawableParticleLine drawableParticleLine = new DrawableParticleLine();
+        double stepDistance = 0.5;
+        LocationUtil.getLocationsSteppedBetweenTwoLocations(locations.get(0), locations.get(1), stepDistance).forEach(steppingLocation -> {
+            drawableParticleLine.drawShape(player, List.of(steppingLocation, locations.get(2)));
+        });
     }),
     LINE(new DrawableParticleLine());
 

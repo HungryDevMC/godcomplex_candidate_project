@@ -1,0 +1,6 @@
+name: ParticleShapes
+main: com.godcomplex.ParticleEffectsPlugin
+version: 1.0
+commands:
+  shape:
+    description: Draw cool particle shapes

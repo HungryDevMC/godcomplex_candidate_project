@@ -11,6 +11,7 @@ public class LocationUtil {
     public static Collection<Location> getLocationsSteppedBetweenTwoLocations(Location location1, Location location2, double steppingDistance) {
         Collection<Location> steppingLocations = new ArrayList<>();
         Location accumulativeLocation = location1.clone();
+        steppingLocations.add(accumulativeLocation);
 
         Vector lineVector = location2.toVector().clone().subtract(accumulativeLocation.toVector()).normalize().multiply(steppingDistance);
         double distance = accumulativeLocation.distance(location2);

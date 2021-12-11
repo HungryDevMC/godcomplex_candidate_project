@@ -11,7 +11,7 @@ public class DrawableOutlinedTriangle implements DrawableParticleShape {
     public void drawShape(Player player, List<Location> locations, String... args) {
         DrawableParticleLine drawableParticleLine = new DrawableParticleLine();
         drawableParticleLine.drawShape(player, List.of(locations.get(0), locations.get(1)));
-        drawableParticleLine.drawShape(player, List.of(locations.get(0), locations.get(2)));
         drawableParticleLine.drawShape(player, List.of(locations.get(1), locations.get(2)));
+        drawableParticleLine.drawShape(player, List.of(locations.get(2), locations.get(0)));
     }
 }

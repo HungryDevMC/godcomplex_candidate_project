@@ -41,10 +41,16 @@ public class ParticleCommand implements CommandExecutor {
         Location drawingLocation = playerSender.getEyeLocation();
         Block targetBlock = playerSender.getTargetBlock(20);
         if (targetBlock != null) {
-            drawingLocation = targetBlock.getLocation().add(0, 1, 0);
+            drawingLocation = targetBlock.getLocation().add(0, 2, 0);
         }
 
-        particleShapeType.getShapeDrawer().drawShape(playerSender, drawingLocation);
+        if (args.length == 1) {
+            //particleShapeType.getShapeDrawer().drawShape(playerSender, drawingLocation);
+            return true;
+        }
+
+        String[] shapeArguments = Arrays.copyOfRange(args, 1, args.length);
+        //particleShapeType.getShapeDrawer().drawShape(playerSender, drawingLocation, shapeArguments);
         return true;
     }
 }

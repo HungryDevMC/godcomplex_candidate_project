@@ -1,6 +1,8 @@
 package com.godcomplex.listeners;
 
+import com.godcomplex.ParticleEffectsPlugin;
 import com.godcomplex.domain.ParticleShapeType;
+import com.godcomplex.runnables.DrawParticleShapeRunnable;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -49,9 +51,8 @@ public class PlayerClickListener implements Listener {
         }
 
         if (VERTICES_LIST.size() == 3) {
-            ParticleShapeType.LINE.getShapeDrawer().drawShape(e.getPlayer(), List.of(VERTICES_LIST.get(0), VERTICES_LIST.get(1)));
-            ParticleShapeType.LINE.getShapeDrawer().drawShape(e.getPlayer(), List.of(VERTICES_LIST.get(0), VERTICES_LIST.get(2)));
-            ParticleShapeType.LINE.getShapeDrawer().drawShape(e.getPlayer(), List.of(VERTICES_LIST.get(1), VERTICES_LIST.get(2)));
+            DrawParticleShapeRunnable drawParticleShapeRunnable = new DrawParticleShapeRunnable(ParticleShapeType.TRIANGLE, e.getPlayer(), VERTICES_LIST, 3);
+            drawParticleShapeRunnable.runTaskTimer(ParticleEffectsPlugin.getInstance(), 0, 10);
             PLAYER_VERTICES_SELECTION_MAP.remove(playerUuid);
         }
     }
